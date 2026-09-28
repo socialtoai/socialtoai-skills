@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-28
+
+- Platform references synced with the live gateway: the Xiaohongshu commerce tools are available again; X comments and user posts run on the new source at 0.2 credits.
+
 ## 0.1.1 (2026-09-27)
 
 - Platform references synced with the live gateway: X comments and user posts at 0.2 credits, packs granted on the key (no `packs=` needed), current paused operations, Douyin/Xiaohongshu comment ordering, Weibo and trending notes.

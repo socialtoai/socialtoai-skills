@@ -53,9 +53,9 @@ Inputs and limits: https://socialtoai.com/docs/commerce/
 
 | Operation | Credits | Cursor | Availability |
 |---|---:|---|---|
-| product_search | 1.5 | yes | Temporarily unavailable, calls cost 0 |
-| product_detail | 1.5 | no | Temporarily unavailable, calls cost 0 |
-| product_reviews | 1.5 | yes | Temporarily unavailable, calls cost 0 |
+| product_search | 1.5 | yes | Available |
+| product_detail | 1.5 | no | Available |
+| product_reviews | 1.5 | yes | Available |
 
 raw pack (separate explicit grant on the key required)
 
