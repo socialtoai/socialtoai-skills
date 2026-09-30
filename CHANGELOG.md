@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-01
+
+- Xiaohongshu comments follow the app's default order (popular comments first)
+
 ## 2026-09-28
 
 - Platform references synced with the live gateway: the Xiaohongshu commerce tools are available again; X comments and user posts run on the new source at 0.2 credits.

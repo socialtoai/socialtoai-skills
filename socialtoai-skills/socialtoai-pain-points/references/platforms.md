@@ -40,12 +40,12 @@ KOL pack (explicit grant required)
 | kol_performance | 2.9 | Available |
 | keyword_index | 2.9 | Available |
 
-- kol_search: Xiaohongshu (小红书蒲公英): up to page_size creators per page with followers, content tags, listed CNY quotes and read/engagement medians. Pages can be sparse or empty and still continue.
+- kol_search: Xiaohongshu (小红书蒲公英): up to page_size creators per page with followers, content tags, listed CNY quotes and read/engagement medians of the last 30 days of non-sponsored (日常) notes, without the note count; verify with kol_performance before recommending. Pages can be sparse or empty and still continue.
 - kol_profile: Xiaohongshu: also 小红书号, gender, likes+collects and business note count.
 - kol_audience: Xiaohongshu: followers only; 0-1 ratios rounded to 4 decimals.
 - kol_pricing: Xiaohongshu: image-note and video-note quotes.
 - kol_performance: Xiaohongshu: also filters daily or sponsored notes, all/image/video content and all/organic traffic.
-- keyword_index: Keyword index is not a search count; source zeros do not prove zero demand. The source chooses the daily window. Creator buckets may overlap.
+- keyword_index: Keyword index is not a search count; source zeros do not prove zero demand. Brand keywords (such as 瑞幸) have their overview totals hidden by the source and returned as unavailable; use mode=daily for them. The source chooses the daily window. Creator buckets may overlap.
 
 commerce pack (separate explicit grant on the key required)
 
@@ -70,6 +70,7 @@ Inputs and limits: https://socialtoai.com/docs/raw/
 - Product and commerce data are outside the six core verbs.
 - Share-link resolution is separate from the observed core supply evidence; prefer a stable public note URL or ID.
 - Native 1d/7d search filters can return older content. When returned dates are older than the requested window, that page reports time_range=all with a warning. Items are preserved and no extra search is made; missing dates remain unverifiable.
+- Comments follow the Xiaohongshu app's default order (sort=platform_default: popularity mixed with recency, popular comments first), 10 per page.
 
 ## Douyin (douyin)
 
