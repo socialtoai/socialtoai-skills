@@ -1,6 +1,6 @@
 ---
 name: socialtoai-setup
-description: Use when the user asks to install, connect, configure or troubleshoot SocialToAI MCP, including 帮我配置 SocialToAI, first-use setup, connection defaults and platform exclusions. Do not use for ordinary social research, installing an unrelated MCP server, obtaining supplier keys, account billing decisions or requests to bypass tool permissions.
+description: Install, connect, configure or troubleshoot the SocialToAI MCP (mcp.socialtoai.com) in Claude Code, Codex, Cursor, Antigravity, Gemini CLI, Cherry Studio, Trae or another client, including first-time setup, supplying the Key, connection defaults and platform exclusions. Use for requests such as 帮我配置 SocialToAI、接入社交数据 MCP、socialtoai 连不上、工具列表里没有 socialtoai、换 Key 后更新连接、默认只搜最近一周或不查 X. Do not use for ordinary social research, installing an unrelated MCP server, obtaining supplier keys, account billing decisions or requests to bypass tool permissions.
 metadata:
   version: "0.1.0"
   contract: "v1"

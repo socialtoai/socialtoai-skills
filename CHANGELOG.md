@@ -2,6 +2,10 @@
 
 ## 2026-10-01
 
+- Skills trigger on platform and task words (小红书调研、找对标、挖痛点、拆爆款、选题) without naming SocialToAI
+
+## 2026-10-01
+
 - Xiaohongshu comments follow the app's default order (popular comments first)
 
 ## 2026-09-28

@@ -1,6 +1,6 @@
 ---
 name: socialtoai-pain-points
-description: Use for SocialToAI research into public user complaints, unmet needs, objections and failed alternatives, including 挖用户痛点 and 评论里的抱怨. Do not use for connection setup, personal medical/legal/financial advice, private group monitoring, demographic profiling, guaranteed demand or estimating market share from social samples.
+description: Mine public complaints, unmet needs, objections and failed alternatives from posts and comments on Xiaohongshu/小红书, Douyin/抖音, Weibo/微博, Zhihu/知乎, Bilibili/B站, Reddit, X and other supported platforms through the connected SocialToAI MCP. Use for 挖痛点、找用户痛点、看评论区吐槽和抱怨、差评原因、用户需求调研、大家用什么替代方案, or what users complain about; the user does not need to mention SocialToAI. Do not use for connection setup, personal medical/legal/financial advice, private group monitoring, demographic profiling, guaranteed demand or estimating market share from social samples.
 metadata:
   version: "0.1.0"
   contract: "v1"

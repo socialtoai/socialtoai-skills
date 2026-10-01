@@ -1,6 +1,6 @@
 ---
 name: socialtoai-viral-analysis
-description: Use when the user asks SocialToAI to analyze a public viral post or video, such as 拆解爆款, unusually high interactions, hooks and audience response. Do not use for finding benchmark accounts, connection setup, writing a promotional post, guaranteed growth advice or reverse-engineering a private ranking algorithm.
+description: Break down why a public post or video did well on Xiaohongshu/小红书, Douyin/抖音, Kuaishou/快手, Bilibili/B站, Weibo/微博, Zhihu/知乎, X, YouTube and other supported platforms, using its details, comments and the author's other posts from the connected SocialToAI MCP. Use for 拆爆款、拆解这条爆款笔记或视频、这条为什么火、爆文分析、互动数异常高、开头钩子和评论区反应, or why a post went viral; the user does not need to mention SocialToAI. Do not use for finding benchmark accounts, connection setup, writing a promotional post, guaranteed growth advice or reverse-engineering a private ranking algorithm.
 metadata:
   version: "0.1.0"
   contract: "v1"

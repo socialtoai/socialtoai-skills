@@ -1,6 +1,6 @@
 ---
 name: socialtoai-benchmarks
-description: Use for finding and comparing public benchmark creators or competitor accounts with SocialToAI, including 找对标账号, similar bloggers and creator shortlist research. Do not use for a single viral post analysis, connection setup, paid audience analytics, private creator dashboards or generic product purchasing advice without a social-account comparison.
+description: Find and compare public benchmark creators or competitor accounts on Xiaohongshu/小红书, Douyin/抖音, Kuaishou/快手, Bilibili/B站, Weibo/微博, Zhihu/知乎, WeChat Official Accounts/公众号, X, Reddit or YouTube with live data from the connected SocialToAI MCP. Use when the user asks to 找对标、找对标账号或对标博主、看竞品账号、找同类博主、筛一份博主名单, find similar creators or competitor accounts, or compare public accounts; the user does not need to mention SocialToAI. Do not use for a single viral post analysis, connection setup, paid audience analytics, private creator dashboards or generic product purchasing advice without a social-account comparison.
 metadata:
   version: "0.1.0"
   contract: "v1"

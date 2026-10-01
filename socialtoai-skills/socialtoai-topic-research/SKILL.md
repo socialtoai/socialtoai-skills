@@ -1,6 +1,6 @@
 ---
 name: socialtoai-topic-research
-description: Use for source-backed SocialToAI topic research and content opportunity selection, including 选题调研, audience questions, discussion trends and an evidence-based topic shortlist. Do not use for connection setup, writing or publishing finished posts, a single viral-post teardown, exhaustive platform-volume estimates or guaranteed traffic predictions.
+description: Find evidence-backed content topics from live public discussion, trending boards and comments on Xiaohongshu/小红书, Douyin/抖音, Bilibili/B站, Zhihu/知乎, Weibo/微博, WeChat Official Accounts/公众号, X, Reddit, YouTube and other supported platforms through the connected SocialToAI MCP. Use for 选题、找选题、选题调研、内容方向、追热点、目标用户最近在问什么、下周发什么, or an evidence-based topic shortlist; the user does not need to mention SocialToAI. Do not use for connection setup, writing or publishing finished posts, a single viral-post teardown, exhaustive platform-volume estimates or guaranteed traffic predictions.
 metadata:
   version: "0.1.0"
   contract: "v1"
