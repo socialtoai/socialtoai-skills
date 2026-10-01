@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-02
+
+- Xiaohongshu: omit count and take the first N; brand_buzz and account notes; answer rules heading
+
 ## 2026-10-01
 
 - Douyin play-count note: search, detail and creator posts report 0; raw video_stats returns real counts

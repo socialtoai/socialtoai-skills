@@ -40,12 +40,12 @@ KOL pack (explicit grant required)
 | kol_performance | 2.9 | Available |
 | keyword_index | 2.9 | Available |
 
-- kol_search: Xiaohongshu (小红书蒲公英): up to page_size creators per page with followers, content tags, listed CNY quotes and read/engagement medians of the last 30 days of non-sponsored (日常) notes, without the note count; verify with kol_performance before recommending. Pages can be sparse or empty and still continue.
+- kol_search: Xiaohongshu (小红书蒲公英): up to page_size creators per page with followers, content tags, listed CNY quotes, 30-day exposure/read/engagement medians and 100/1000-like note shares of non-sponsored (日常) notes, 30-day sponsored (合作) note medians, follower growth and active-follower share, without note counts. Source zeros that are not measurements are listed in unavailable_metrics, never given as 0. Shortlist from these fields and check only finalists with kol_performance. Pages can be sparse or empty and still continue.
 - kol_profile: Xiaohongshu: also 小红书号, gender, likes+collects and business note count.
 - kol_audience: Xiaohongshu: followers only; 0-1 ratios rounded to 4 decimals.
 - kol_pricing: Xiaohongshu: image-note and video-note quotes.
 - kol_performance: Xiaohongshu: also filters daily or sponsored notes, all/image/video content and all/organic traffic.
-- keyword_index: Keyword index is not a search count; source zeros do not prove zero demand. Brand keywords (such as 瑞幸) have their overview totals hidden by the source and returned as unavailable; use mode=daily for them. The source chooses the daily window. Creator buckets may overlap.
+- keyword_index: Keyword index is not a search count; source zeros do not prove zero demand. Brand keywords (such as 瑞幸) have their overview totals hidden by the source and returned as unavailable; use mode=daily for them. After that, a repeat overview of the same keyword within 24 hours is refused free (invalid_params) without asking the source. The source chooses the daily window. Creator buckets may overlap.
 
 commerce pack (separate explicit grant on the key required)
 
@@ -66,7 +66,7 @@ Inputs and limits: https://socialtoai.com/docs/raw/
 | favorites | 1.5 | yes | Available |
 
 - View counts are not exposed because the platform hides them. Missing metrics are not zero.
-- Note links carry the xsec_token Xiaohongshu issued for search and detail results. They open in the app, or on the web after logging in; signed-out browsers go to the login page, and tokens can expire. Creator-post results come without a token and may show "temporarily unavailable"; call detail on that note for a link that opens.
+- Note links carry the xsec_token Xiaohongshu issued for search and detail results. They open in the app, or on the web after logging in; signed-out browsers go to the login page, and tokens can expire. Creator-post results come without a token, so they carry no link; call detail on that note for a link that opens.
 - The 30d search filter narrows to 7d with a warning; it never widens to all time.
 - Product and commerce data are outside the six core verbs.
 - Share-link resolution is separate from the observed core supply evidence; prefer a stable public note URL or ID.
