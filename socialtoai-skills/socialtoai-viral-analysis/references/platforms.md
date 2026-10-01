@@ -128,6 +128,7 @@ Inputs and limits: https://socialtoai.com/docs/raw/
 | related | 0.2 | no | Available |
 
 - Content search does not support most_collected, most_comments or 30d natively: those sorts fall back to relevance and 30d narrows to 7d, with warnings. User search does not apply content filters.
+- Content search cannot combine latest or most_liked with a time range (Douyin rejects it): with 1d or 7d the window is kept and the sort falls back to relevance, with a warning. Use time_range=all to sort by latest or most likes.
 - Use standard douyin.com URLs or v.douyin.com share links for items, and sec_user_id or a profile URL for accounts.
 - Creator posts include verified coauthored posts when the queried creator is explicitly identified.
 - The first creator-posts page can include up to 3 pinned posts beyond the normal page, so it may return up to 23 items.

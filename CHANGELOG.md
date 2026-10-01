@@ -2,6 +2,10 @@
 
 ## 2026-10-01
 
+- Douyin: a sorted search with a time range now keeps the window and falls back to relevance
+
+## 2026-10-01
+
 - Search narrows unsupported 30d to 7d; Xiaohongshu links carry xsec_token; trending items link to platform search; Douyin lists drop cover URLs and add related searches; Weibo fallback detection
 
 ## 2026-10-01
