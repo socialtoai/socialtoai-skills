@@ -132,7 +132,7 @@ Inputs and limits: https://socialtoai.com/docs/raw/
 - Use standard douyin.com URLs or v.douyin.com share links for items, and sec_user_id or a profile URL for accounts.
 - Creator posts include verified coauthored posts when the queried creator is explicitly identified.
 - The first creator-posts page can include up to 3 pinned posts beyond the normal page, so it may return up to 23 items.
-- Douyin does not publish play counts to anyone but the author, so metrics.views is omitted: it means unavailable, not zero views.
+- Douyin search, detail and creator-post endpoints report other creators' play counts as 0, so metrics.views is omitted: it means unavailable, not zero views. For play counts, use video_stats in the raw pack (up to 2 posts per call).
 - Trending omits the pinned topic above the numbered board, so ranks match Douyin's own numbering; heat is shown only when Douyin reports one.
 - Search and creator-post lists return no media, only the video duration in platform_extra.duration_s; call detail for note images or a playable video URL, which expire. When count is below a search page, the next cursor returns the rest of that page first.
 - Search, creator posts and detail include platform_extra.related_searches when Douyin provides them: up to 5 distinct related search words for the post, useful for topic research and spotting products or brands it mentions.

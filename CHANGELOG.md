@@ -2,6 +2,10 @@
 
 ## 2026-10-01
 
+- Douyin play-count note: search, detail and creator posts report 0; raw video_stats returns real counts
+
+## 2026-10-01
+
 - Douyin: a sorted search with a time range now keeps the window and falls back to relevance
 
 ## 2026-10-01
