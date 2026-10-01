@@ -66,7 +66,8 @@ Inputs and limits: https://socialtoai.com/docs/raw/
 | favorites | 1.5 | yes | Available |
 
 - View counts are not exposed because the platform hides them. Missing metrics are not zero.
-- The 30d search filter falls back to all with a warning.
+- Note links carry the xsec_token Xiaohongshu issued for search and detail results. They open in the app, or on the web after logging in; signed-out browsers go to the login page, and tokens can expire. Creator-post results come without a token and may show "temporarily unavailable"; call detail on that note for a link that opens.
+- The 30d search filter narrows to 7d with a warning; it never widens to all time.
 - Product and commerce data are outside the six core verbs.
 - Share-link resolution is separate from the observed core supply evidence; prefer a stable public note URL or ID.
 - Native 1d/7d search filters can return older content. When returned dates are older than the requested window, that page reports time_range=all with a warning. Items are preserved and no extra search is made; missing dates remain unverifiable.
@@ -126,13 +127,14 @@ Inputs and limits: https://socialtoai.com/docs/raw/
 | video_stats | 0.2 | no | Available |
 | related | 0.2 | no | Available |
 
-- Content search does not support most_collected, most_comments or 30d natively. Fallbacks are reported in warnings. User search does not apply content filters.
+- Content search does not support most_collected, most_comments or 30d natively: those sorts fall back to relevance and 30d narrows to 7d, with warnings. User search does not apply content filters.
 - Use standard douyin.com URLs or v.douyin.com share links for items, and sec_user_id or a profile URL for accounts.
 - Creator posts include verified coauthored posts when the queried creator is explicitly identified.
 - The first creator-posts page can include up to 3 pinned posts beyond the normal page, so it may return up to 23 items.
 - Douyin does not publish play counts to anyone but the author, so metrics.views is omitted: it means unavailable, not zero views.
 - Trending omits the pinned topic above the numbered board, so ranks match Douyin's own numbering; heat is shown only when Douyin reports one.
-- Search and creator-post lists return a cover image with the duration in platform_extra.duration_s; playable video URLs expire and come only from detail. When count is below a search page, the next cursor returns the rest of that page first.
+- Search and creator-post lists return no media, only the video duration in platform_extra.duration_s; call detail for note images or a playable video URL, which expire. When count is below a search page, the next cursor returns the rest of that page first.
+- Search, creator posts and detail include platform_extra.related_searches when Douyin provides them: up to 5 distinct related search words for the post, useful for topic research and spotting products or brands it mentions.
 - Comments follow Douyin's own ranking (sort=platform_default), not likes or time. Douyin re-ranks every page, so comments already returned are omitted from later pages and counted in warnings.
 
 ## X (x)
@@ -223,7 +225,7 @@ Inputs and limits: https://socialtoai.com/docs/raw/
 - Trending is not supported. Search with sort=latest is an alternative, with a different meaning.
 - Detail and comments require an HTTPS mp.weixin.qq.com article URL, not a bare ID. Returned article IDs are that URL, so they can be passed on directly.
 - Profiles and creator posts require gh_username. Discover an account with search(type=user) first; discovery is a separate paid call.
-- The 30d search filter falls back to all with a warning. Count trims the projected results rather than changing the source page size.
+- The 30d search filter narrows to 7d with a warning; it never widens to all time. Count trims the projected results rather than changing the source page size.
 - Read and like counts appear only in creator posts, taken from the account's list display (for example 21k reads is rounded). Search and detail carry no engagement counts.
 - Creator posts omit the author when the article has no byline; the account name comes from the profile.
 
@@ -255,7 +257,8 @@ Inputs and limits: https://socialtoai.com/docs/raw/
 | reactions | 0.2 | no | Available |
 | reposts | 0.2 | yes | Available |
 
-- Relevance search reads Weibo's popular (热门) results; latest reads the real-time feed. Publish times are converted from Weibo's relative Beijing-time labels.
+- Relevance search reads Weibo's popular (热门) results; latest reads the real-time feed, also with time_range 1d or 7d, where posts older than the window are removed and paging stops at the window boundary. Publish times are converted from Weibo's relative Beijing-time labels.
+- When nothing matches, Weibo fills the page with unrelated trending posts; a page where no post contains the query words is returned as empty with a warning, and posts without them on other pages are counted in a warning.
 - Unsupported popularity sorts fall back to relevance; text falls back to all. Image/video search cannot independently apply a non-relevance sort.
 - Search results currently carry no engagement counts, so metrics are omitted; truncated previews end with …. Call detail on a post for its counts and full text.
 - Search and creator posts may continue until an empty page when the source does not provide a continuation signal. Inspect warnings and apply a page budget.

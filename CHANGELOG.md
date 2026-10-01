@@ -2,6 +2,10 @@
 
 ## 2026-10-01
 
+- Search narrows unsupported 30d to 7d; Xiaohongshu links carry xsec_token; trending items link to platform search; Douyin lists drop cover URLs and add related searches; Weibo fallback detection
+
+## 2026-10-01
+
 - Skills trigger on platform and task words (小红书调研、找对标、挖痛点、拆爆款、选题) without naming SocialToAI
 
 ## 2026-10-01
