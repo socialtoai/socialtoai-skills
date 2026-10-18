@@ -32,14 +32,13 @@ One Markdown skill file ([`plugins/socialtoai/skills/socialtoai/SKILL.md`](plugi
 ### As a Claude Code plugin
 
 ```bash
-export SOCIALTOAI_KEY="<YOUR_API_KEY>"
-
 # in Claude Code
 /plugin marketplace add socialtoai/socialtoai-skills
 /plugin install socialtoai@socialtoai
+/mcp
 ```
 
-The plugin reads the key from the environment variable `SOCIALTOAI_KEY`; no file holds it. Create a key in the [console](https://socialtoai.com/sign-in/?utm_source=github&utm_medium=repository).
+After installing, pick socialtoai in `/mcp`: your browser opens our sign-in page; sign in with the email code and press Allow. No key is needed and no file holds one.
 
 ### The skill file alone
 

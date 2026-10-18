@@ -32,14 +32,13 @@ SocialToAI 是一个让 AI 工具读取社交媒体上公开可见内容（帖�
 ### 作为 Claude Code 插件
 
 ```bash
-export SOCIALTOAI_KEY="<YOUR_API_KEY>"
-
 # in Claude Code
 /plugin marketplace add socialtoai/socialtoai-skills
 /plugin install socialtoai@socialtoai
+/mcp
 ```
 
-插件从环境变量 `SOCIALTOAI_KEY` 读取 Key，任何文件里都不写 Key。Key 在[控制台](https://socialtoai.com/zh/sign-in/?utm_source=github&utm_medium=repository)创建。
+装好后在 `/mcp` 里选 socialtoai，浏览器会打开登录页，用邮箱验证码登录并点「允许」即可，不用 Key，任何文件里也没有 Key。
 
 ### 只要技能文件
 
