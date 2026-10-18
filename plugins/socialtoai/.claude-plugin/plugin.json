@@ -1,0 +1,35 @@
+{
+  "name": "socialtoai",
+  "description": "Read public social media posts, comments, profiles and trends from 18 platforms. Pay per call.",
+  "version": "2.0.0",
+  "author": {
+    "name": "SocialToAI",
+    "email": "support@socialtoai.com"
+  },
+  "homepage": "https://socialtoai.com/?utm_source=claude-plugins&utm_medium=directory",
+  "repository": "https://github.com/socialtoai/socialtoai-skills",
+  "keywords": [
+    "mcp-server",
+    "social-media",
+    "tiktok",
+    "instagram",
+    "x",
+    "reddit",
+    "youtube",
+    "facebook",
+    "linkedin",
+    "threads",
+    "telegram",
+    "pinterest",
+    "xiaohongshu",
+    "douyin",
+    "weibo",
+    "wechat",
+    "bilibili",
+    "zhihu",
+    "kuaishou",
+    "wechat-channels",
+    "meta-ad-library",
+    "google-ads-transparency"
+  ]
+}

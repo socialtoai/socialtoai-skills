@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "socialtoai": {
+      "type": "http",
+      "url": "https://mcp.socialtoai.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${SOCIALTOAI_KEY}"
+      }
+    }
+  }
+}

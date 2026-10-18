@@ -1,0 +1,21 @@
+{
+  "name": "socialtoai",
+  "owner": {
+    "name": "SocialToAI",
+    "email": "support@socialtoai.com"
+  },
+  "metadata": {
+    "description": "Read public social media posts, comments, profiles and trends from 18 platforms. Pay per call.",
+    "version": "2.0.0"
+  },
+  "plugins": [
+    {
+      "name": "socialtoai",
+      "source": "./plugins/socialtoai",
+      "description": "Read public social media posts, comments, profiles and trends from 18 platforms. Pay per call.",
+      "version": "2.0.0",
+      "homepage": "https://socialtoai.com/?utm_source=claude-plugins&utm_medium=directory",
+      "category": "data"
+    }
+  ]
+}
