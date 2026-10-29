@@ -260,22 +260,24 @@ Posts from one account. `POST https://api.socialtoai.com/v1/user_posts`
 
 ## MCP tools
 
-- `search`: Search a platform for content. Read-only. Each line: what to pass, then its platforms, 2 credits a call unless numbered. A list of platforms is one call each. Failed calls cost 0.
-- `trending`: Read a platform's trending list. Read-only. Each line: what to pass, then its platforms, 2 credits a call unless numbered. A list of platforms is one call each. Failed calls cost 0.
+- `search`: Search a platform for content. Read-only. Each line: what to pass, then its platforms, 2 credits a call unless numbered. A list of platforms is one call each. Failed calls cost 0. Need 100 items? Pass limit=100 (each page a call).
+- `trending`: Read a platform's trending list. Read-only. Each line: what to pass, then its platforms, 2 credits a call unless numbered. A list of platforms is one call each. Failed calls cost 0. Need 100 items? Pass limit=100 (each page a call).
 - `detail`: Get one piece of content by its id or link. Read-only. Each line: what to pass (a|b: either one), then its platforms, 2 credits a call unless numbered. A list of platforms, ids or links is one call each. Failed calls cost 0.
-- `comments`: Read the comments under one piece of content. Read-only. Each line: what to pass (a|b: either one), then its platforms, 2 credits a call unless numbered. A list of platforms, ids or links is one call each. Failed calls cost 0.
+- `comments`: Read the comments under one piece of content. Read-only. Each line: what to pass (a|b: either one), then its platforms, 2 credits a call unless numbered. A list of platforms, ids or links is one call each. Failed calls cost 0. Need 100 items? Pass limit=100 (each page a call).
 - `user_profile`: Get one account's public profile: name, bio, verification and follower counts. Read-only. Each line: what to pass (a|b: either one), then its platforms, 2 credits a call unless numbered. A list of platforms is one call each. Failed calls cost 0.
-- `user_posts`: List what one account has published. Read-only. Each line: what to pass (a|b: either one), then its platforms, 2 credits a call unless numbered. A list of platforms is one call each. Failed calls cost 0.
-- `find`: Find what can be called by what it does, in plain words, English or Chinese. Answers the matching actions and ops, best first, each with its parameters, its credits per call and a call that works. Free. Then use the action's tool, or call with the op.
+- `user_posts`: List what one account has published. Read-only. Each line: what to pass (a|b: either one), then its platforms, 2 credits a call unless numbered. A list of platforms is one call each. Failed calls cost 0. Need 100 items? Pass limit=100 (each page a call).
+- `find`: Find what can be called by what it does, in plain words, English or Chinese. Answers the matching actions and ops, best first, each with its parameters, its credits per call and a call that works. Free. Then use the action's tool, or call with the op. When the platform asked about does not offer it, the answer says not_offered and lists only the closest calls that are: tell the user so, and never pass those off as what was asked for.
 - `call`: Call one platform-specific capability by its op ("platform.name"): what the six actions do not cover. find finds an op by what it does; capabilities lists each with its parameters and its credits per call (1 to 24). Read-only. A failed call costs 0.
 - `capabilities`: List what can be called now: each action per platform and each op, with its parameters (type, values, default), its credits per call, its page size, the fields it cannot give and a call that works. Free. The whole list is long: pass platform.
-- `account`: Whose key or connected app this connection is and where it stands: the plan (free or paid), the credit balance, and today's spend, daily limit and room left of the connection and of its account. Free.
+- `account`: Whose key or connected app this connection is and where it stands: the plan (free or paid), the credit balance, and today's spend, daily limit and room left of the connection and of its account; what buying gets, with a purchase link needing no sign-in (repeat purchase.display). Free.
 - `brand_buzz`: What people say about a brand or product on each platform: the share of each attitude, what is mentioned most, and the posts with the most engagement, each with its source link. Runs on our side. A costly or background run answers its price first.
 - `comment_insights`: What the comments under your posts are about: the topics and their shares, the questions asked, who wants to buy and what is complained about, with the comments quoted. Runs on our side. A costly or background run answers its price first.
 - `find_creators`: Creators on one platform for a niche: their size, their recent posts, and how well each fits what you asked for, with the reasons. Runs on our side. A costly or background run answers its price first.
 - `account_watch`: What a set of accounts published lately and which posts did clearly better than each account's usual. Runs on our side. A costly or background run answers its price first.
 - `creator_card`: One creator across platforms: the accounts found for the same person, with followers, posts, engagement and how strong the evidence is that each is theirs. Runs on our side. A costly or background run answers its price first.
 - `research`: Run one of these by its name, on our side. A costly or background run answers its price first. Pass links whole, as given. On error, follow error.fix. Tell the user billing.display.
+- `watch`: Watch something for the user: a search, action, op or tool run again every day or week on our side, delivering only what is new since the run before, to email, webhooks and watch_news.
+- `watch_news`: What the user's watches found that they have not been shown yet, newest first, with each watch, its time and status. Use it when the user asks what is new. Free. Pass id for one watch; what is shown is not shown again.
 
 ## Ready-made tools
 
@@ -294,6 +296,7 @@ Posts from one account. `POST https://api.socialtoai.com/v1/user_posts`
 - When the user gives a budget, send `max_cost_credits`: a call that would cost more is refused for free, with the quote.
 - A field that is `null` is one the platform does not give (see `unavailable`). Do not guess its value.
 - Whoever wrote a comment is anonymous. Do not try to identify them.
+- Send an `Idempotency-Key` header with every charged call over HTTP: a new one for each request, the same one when you retry it. If an answer was lost after a charge, the same request under the same key, or `GET /v1/results/{request_id}`, returns it for free.
 - For the next page send `page.cursor` back unchanged as `cursor`; each page is its own call.
 - Cite a source by its `url`. An item whose `url` is null has no link: say so, and never make one up.
 - On an error read `error.fix`: it names the parameter, the allowed values or where to go. Correct the call once; do not repeat a call that failed the same way.
@@ -329,13 +332,13 @@ Posts from one account. `POST https://api.socialtoai.com/v1/user_posts`
 - Ad libraries (2): Meta Ad Library, Google Ads Transparency
 - Actions (6): search, trending, detail, comments, user_profile, user_posts, plus a catalog of platform-specific interfaces (find / call)
 - Tools (7): Brand buzz, Comment analysis, Account watch, Find creators, Creator profile, Bulk link data, Viral finder
-- API: https://api.socialtoai.com/v1 · MCP (Streamable HTTP): https://mcp.socialtoai.com/mcp · Auth: API key; OAuth sign-in for ChatGPT and Claude's apps
+- API: https://api.socialtoai.com/v1 · MCP (Streamable HTTP): https://mcp.socialtoai.com/mcp · Auth: sign-in (OAuth) in ChatGPT, Claude, Claude Code, Codex and Cursor; an API key in a header for scripts and servers
 - No key needed for: capabilities, find, OpenAPI
 - Price: $10 = 3,000 credits · $50 = 20,000 · $200 = 100,000 · any amount from $10 to $2,000
 - Per call: most calls cost 2 credits (range 1–24); from $0.002 per call
 - Free: 100 credits on sign-up, no card. Credits never expire. No subscription. No refunds.
 - Charged: successful calls, including a search that ran and found nothing. Not charged: failed calls.
-- Limits: 1 request per second per key; 5 per second after the first purchase
+- Limits: 5 requests per second per key; 20 per second after the first purchase
 - Payment: card or Alipay, priced in USD
 - Data: content and account information publicly visible on the platform; commenters are anonymised
 - Updated: 2026-10-17 · price version pv_e5a1c68e5861

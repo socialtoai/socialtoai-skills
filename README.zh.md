@@ -12,20 +12,20 @@ SocialToAI 是一个让 AI 工具读取社交媒体上公开可见内容（帖�
 | 广告库（2 个） | Meta 广告库、Google 广告透明度中心 |
 | 动作（6 个） | search、trending、detail、comments、user_profile、user_posts，另有平台独有接口目录（find / call） |
 | 工具（7 个） | 品牌口碑、评论分析、账号监测、找达人、达人档案、批量链接数据、爆款发现 |
-| API | https://api.socialtoai.com/v1 · MCP（Streamable HTTP）：https://mcp.socialtoai.com/mcp · 认证：API Key；ChatGPT 和 Claude 应用用 OAuth 登录 |
+| API | https://api.socialtoai.com/v1 · MCP（Streamable HTTP）：https://mcp.socialtoai.com/mcp · 认证：ChatGPT、Claude、Claude Code、Codex、Cursor 用 OAuth 登录授权；脚本和服务器在请求头带 API Key |
 | 不带 Key 可用 | capabilities、find、OpenAPI |
 | 价格 | $10 = 3,000 积分 · $50 = 20,000 · $200 = 100,000 · $10 到 $2,000 的任意整数金额 |
 | 每次调用 | 多数调用 2 积分（范围 1–24）；低至每次 $0.002 |
 | 免费 | 注册送 100 积分、不用绑卡；积分不过期、不订阅、不退款。 |
 | 计费 | 成功的调用扣费，搜索正常但没搜到照扣；失败不扣。 |
-| 限制 | 每把 Key 每秒 1 次，首次购买后每秒 5 次 |
+| 限制 | 每把 Key 每秒 5 次，首次购买后每秒 20 次 |
 | 支付 | 银行卡或支付宝，以美元计价 |
 | 数据 | 平台上公开可见的内容和账号信息；评论者一律匿名 |
 | 更新 | 2026-10-17 · 价格版本 pv_e5a1c68e5861 |
 
 ## 这是什么
 
-一个 Markdown 技能文件（[`plugins/socialtoai/skills/socialtoai/SKILL.md`](plugins/socialtoai/skills/socialtoai/SKILL.md)）：让你的 AI 知道什么时候该用 SocialToAI、每个调用怎么写、要花多少积分、出错了怎么办。它由当前开放的平台、调用和价格生成，一个文件覆盖全部平台。这个仓库同时是一个 Claude Code 插件市场：装上插件，就带上 MCP 配置和这个技能文件，Key 由你自己提供。
+一个 Markdown 技能文件（[`plugins/socialtoai/skills/socialtoai/SKILL.md`](plugins/socialtoai/skills/socialtoai/SKILL.md)）：让你的 AI 知道什么时候该用 SocialToAI、每个调用怎么写、要花多少积分、出错了怎么办。它由当前开放的平台、调用和价格生成，一个文件覆盖全部平台。另有 8 个任务技能（见下文），每个对应一件具体的事。这个仓库同时是一个 Claude Code 插件市场：装上插件，就带上 MCP 配置、这个技能文件和 8 个任务技能，连接时登录授权，不用 Key。
 
 ## 安装
 
@@ -48,6 +48,32 @@ mkdir -p ~/.claude/skills/socialtoai && \
 ```
 
 其他 AI 客户端怎么接入 MCP 服务，见 https://github.com/socialtoai/socialtoai-mcp 。
+
+## 任务技能（8 个）
+
+每个技能是一个完整任务：什么时候用、按什么步骤调用哪些工具、输出什么格式、大概花多少积分，并附一份用线上真实录制做的示例输出。第一次运行时，如果还没连上 SocialToAI，技能会先告诉你怎么连。
+
+| 技能 | 做什么 | 一次大约多少积分 | 示例 |
+| --- | --- | --- | --- |
+| [小红书竞品笔记拆解](plugins/socialtoai/skills/xiaohongshu-competitor-notes/SKILL.md) `xiaohongshu-competitor-notes` | 哪些竞品笔记跑赢了平时，逐篇拆标题、形式、开头和评论区，再给选题 | 126–186 | [示例](plugins/socialtoai/skills/xiaohongshu-competitor-notes/examples/example.md) |
+| [抖音评论痛点](plugins/socialtoai/skills/douyin-comment-pain-points/SKILL.md) `douyin-comment-pain-points` | 抖音评论区里的痛点和没被满足的需求，计数、引用原话 | ≈ 62 | [示例](plugins/socialtoai/skills/douyin-comment-pain-points/examples/example.md) |
+| [Reddit + X 用户抱怨](plugins/socialtoai/skills/reddit-x-complaints/SKILL.md) `reddit-x-complaints` | Reddit 和 X 上的抱怨归类、期待和换用信号 | ≈ 88 | [示例](plugins/socialtoai/skills/reddit-x-complaints/examples/example.md) |
+| [品牌周报](plugins/socialtoai/skills/weekly-brand-report/SKILL.md) `weekly-brand-report` | 品牌和最多 2 个竞品在最多 5 个平台上的口碑，和上周比 | 36–348 a week | [示例](plugins/socialtoai/skills/weekly-brand-report/examples/example.md) |
+| [达人初筛](plugins/socialtoai/skills/creator-shortlist/SKILL.md) `creator-shortlist` | 按需求初筛达人，标出风险和其他平台账号 | ≈ 79 (Douyin) | [示例](plugins/socialtoai/skills/creator-shortlist/examples/example.md) |
+| [热点选题](plugins/socialtoai/skills/trending-topic-ideas/SKILL.md) `trending-topic-ideas` | 热榜加本周领域爆款，变成带证据的选题 | ≈ 118 | [示例](plugins/socialtoai/skills/trending-topic-ideas/examples/example.md) |
+| [出海舆情](plugins/socialtoai/skills/overseas-reputation-check/SKILL.md) `overseas-reputation-check` | 品牌在海外五个平台的口碑、风险信号和本地竞品对比 | ≈ 214 | [示例](plugins/socialtoai/skills/overseas-reputation-check/examples/example.md) |
+| [评论买点提炼](plugins/socialtoai/skills/comment-purchase-drivers/SKILL.md) `comment-purchase-drivers` | 从评论和买家评价里提炼买点和犹豫点，写成卖点草稿 | 62–132 | [示例](plugins/socialtoai/skills/comment-purchase-drivers/examples/example.md) |
+
+积分按 $10 = 3,000 积分换算（$10 档每积分约 $0.0033），失败的调用不扣。
+
+**装全部：** 上面的 Claude Code 插件命令会一起装上这 8 个技能和基础技能。
+
+**只装一个**（把 `<技能名>` 换成表里的英文名）：
+
+```bash
+n=<技能名>; mkdir -p ~/.claude/skills/$n && \
+  curl -fsSL https://raw.githubusercontent.com/socialtoai/socialtoai-skills/main/plugins/socialtoai/skills/$n/SKILL.md -o ~/.claude/skills/$n/SKILL.md
+```
 
 ## 录制的示例
 
