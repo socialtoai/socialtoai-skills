@@ -9,9 +9,9 @@ SocialToAI is an API and MCP server that lets AI tools read publicly visible soc
 
 ## Connect
 
-- MCP (Streamable HTTP): `https://mcp.socialtoai.com/mcp`, with the header `Authorization: Bearer $SOCIALTOAI_KEY`.
+- MCP (Streamable HTTP): `https://mcp.socialtoai.com/mcp`, with the header `Authorization: Bearer $SOCIALTOAI_API_KEY`.
 - HTTP: `POST https://api.socialtoai.com/v1/<action>` with a JSON body and the same header.
-- The key is read from the environment variable `SOCIALTOAI_KEY`. Never print a key, and never write one into a file, a command or an address.
+- The key is read from the environment variable `SOCIALTOAI_API_KEY`. Never print a key, and never write one into a file, a command or an address.
 - If the MCP tools are present, use them. Otherwise call the HTTP API.
 
 ## Actions
@@ -266,17 +266,17 @@ Posts from one account. `POST https://api.socialtoai.com/v1/user_posts`
 - `comments`: Read the comments under one piece of content. Read-only. Each line: what to pass (a|b: either one), then its platforms, 2 credits a call unless numbered. A list of platforms, ids or links is one call each. Failed calls cost 0. Need 100 items? Pass limit=100 (each page a call).
 - `user_profile`: Get one account's public profile: name, bio, verification and follower counts. Read-only. Each line: what to pass (a|b: either one), then its platforms, 2 credits a call unless numbered. A list of platforms is one call each. Failed calls cost 0.
 - `user_posts`: List what one account has published. Read-only. Each line: what to pass (a|b: either one), then its platforms, 2 credits a call unless numbered. A list of platforms is one call each. Failed calls cost 0. Need 100 items? Pass limit=100 (each page a call).
-- `find`: Find what can be called by what it does, in plain words, English or Chinese. Answers the matching actions and ops, best first, each with its parameters, its credits per call and a call that works. Free. Then use the action's tool, or call with the op. When the platform asked about does not offer it, the answer says not_offered and lists only the closest calls that are: tell the user so, and never pass those off as what was asked for.
+- `find`: Find what can be called by what it does, in plain words, English or Chinese: the matching actions and ops, best first, each with its parameters, credits per call and a call that works. Free. Asked about docs or code, it adds the docs links. Where the platform asked about does not offer it, not_offered says so and only the closest calls are listed: tell the user, never pass those off as what was asked for.
 - `call`: Call one platform-specific capability by its op ("platform.name"): what the six actions do not cover. find finds an op by what it does; capabilities lists each with its parameters and its credits per call (1 to 24). Read-only. A failed call costs 0.
-- `capabilities`: List what can be called now: each action per platform and each op, with its parameters (type, values, default), its credits per call, its page size, the fields it cannot give and a call that works. Free. The whole list is long: pass platform.
-- `account`: Whose key or connected app this connection is and where it stands: the plan (free or paid), the credit balance, and today's spend, daily limit and room left of the connection and of its account; what buying gets, with a purchase link needing no sign-in (repeat purchase.display). Free.
-- `brand_buzz`: What people say about a brand or product on each platform: the share of each attitude, what is mentioned most, and the posts with the most engagement, each with its source link. Runs on our side. A costly or background run answers its price first.
-- `comment_insights`: What the comments under your posts are about: the topics and their shares, the questions asked, who wants to buy and what is complained about, with the comments quoted. Runs on our side. A costly or background run answers its price first.
-- `find_creators`: Creators on one platform for a niche: their size, their recent posts, and how well each fits what you asked for, with the reasons. Runs on our side. A costly or background run answers its price first.
-- `account_watch`: What a set of accounts published lately and which posts did clearly better than each account's usual. Runs on our side. A costly or background run answers its price first.
-- `creator_card`: One creator across platforms: the accounts found for the same person, with followers, posts, engagement and how strong the evidence is that each is theirs. Runs on our side. A costly or background run answers its price first.
-- `research`: Run one of these by its name, on our side. A costly or background run answers its price first. Pass links whole, as given. On error, follow error.fix. Tell the user billing.display.
-- `watch`: Watch something for the user: a search, action, op or tool run again every day or week on our side, delivering only what is new since the run before, to email, webhooks and watch_news.
+- `capabilities`: List what can be called now: each action per platform and each op, with its parameters, credits per call, page size, the fields it cannot give and a call that works. Free. The whole list is long: pass platform.
+- `account`: Whose key or connected app this is and where it stands: plan (free or paid), credit balance, and today's spend, daily limit and room left of the connection and its account; what buying gets, with a purchase link needing no sign-in (repeat purchase.display). Free. Writing a script? for_scripts says how to get an API key.
+- `brand_buzz`: What people say about a brand or product on each platform: the share of each attitude, what is mentioned most, and the posts with the most engagement, each with its source link. Runs on our side. A costly or long run quotes its price first.
+- `comment_insights`: What the comments under your posts are about: the topics and their shares, the questions asked, who wants to buy and what is complained about, with the comments quoted. Runs on our side. A costly or long run quotes its price first.
+- `find_creators`: Creators on one platform for a niche: their size, their recent posts, and how well each fits what you asked for, with the reasons. Runs on our side. A costly or long run quotes its price first.
+- `account_watch`: What a set of accounts published lately and which posts did clearly better than each account's usual. Runs on our side. A costly or long run quotes its price first.
+- `creator_card`: One creator across platforms: the accounts found for the same person, with followers, posts, engagement and how strong the evidence is that each is theirs. Runs on our side. A costly or long run quotes its price first.
+- `research`: Run one of these by its name, on our side. A costly or long run quotes its price first. Pass links whole, as given. On error, follow error.fix. Tell the user billing.display.
+- `watch`: Watch for the user: a search, action, op or tool run again by us every day or week, delivering only what is new to email, webhooks, a Feishu/WeCom/Slack chat, an RSS feed and watch_news.
 - `watch_news`: What the user's watches found that they have not been shown yet, newest first, with each watch, its time and status. Use it when the user asks what is new. Free. Pass id for one watch; what is shown is not shown again.
 
 ## Ready-made tools
