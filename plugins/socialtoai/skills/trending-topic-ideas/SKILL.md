@@ -4,12 +4,22 @@ description: "Turn what is trending now into content ideas for a niche: platform
 license: MIT
 metadata:
   author: SocialToAI
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 # Trending topic ideas · 热点选题
 
 Platform hot lists plus this week's breakout posts in a niche, turned into content ideas with the evidence beside each. 平台热榜加上本周领域内跑赢平时的内容，变成带证据的选题。
+
+## What you hand over · 交付物
+
+Ten content ideas with evidence: for each, the angle, why now with a link, the format that worked, a draft title and any brand-safety note. 10 个带证据的选题：角度、为什么是现在（带链接）、有效的形式、标题草稿和风险提示。
+
+**Done when:**
+
+- Each idea points to a hot-list item or a breakout post with a link.
+- Evidence and ideas are kept apart.
+- Topics touching news or controversy carry a brand-safety note.
 
 ## When to use · 什么时候用
 
@@ -17,15 +27,16 @@ Platform hot lists plus this week's breakout posts in a niche, turned into conte
 - "What home-coffee content is taking off on TikTok and YouTube this week?"
 - Weekly content planning.
 
-## Connect first · 先连接
+## Before you start · 开始之前
 
-1. Call `account` (free). If it answers, note the balance and go on.
-2. If the SocialToAI tools are not available, stop and tell the user how to connect, then wait for them:
-   - **Claude Code:** `claude mcp add --transport http socialtoai https://mcp.socialtoai.com/mcp`, then `/mcp` → socialtoai → sign in → Allow. Or install this plugin: `/plugin marketplace add socialtoai/socialtoai-skills`, then `/plugin install socialtoai@socialtoai`.
+1. Call `account` (free). Note the balance and compare it with the cost below. If the job costs more than the balance, say so and offer the smaller version before spending anything.
+2. **If the SocialToAI tools are not there, or a call answers `unauthorized` (401): stop and connect first.** Nothing was charged. Tell the user:
+   - **Claude Code:** `claude mcp add --transport http socialtoai https://mcp.socialtoai.com/mcp`, then `/mcp` → socialtoai → sign in → Allow.
    - **Codex:** `codex mcp add socialtoai --url https://mcp.socialtoai.com/mcp`
    - **ChatGPT, Claude apps, Cursor and other clients:** https://socialtoai.com/mcp/ (中文：https://socialtoai.com/zh/mcp/)
-   - Signing in creates the account with 100 free credits, no card. Never ask the user to paste a key into the chat.
-3. If the balance is below the cost estimate below, say so before running anything.
+   - Signing in creates the account with **100 free credits, no card**, and no platform account of theirs is used. Hot lists are cheap (2 credits on most platforms) and a breakout run is 24–54, so 100 free credits cover hot lists plus one platform's breakouts.
+   - Never ask the user to paste a key into the chat.
+3. When they say it is connected, carry on from where you stopped, with what they already told you. Do not ask again.
 
 ## Ask for (only what is missing) · 需要的输入
 
@@ -66,6 +77,17 @@ Platform hot lists plus this week's breakout posts in a niche, turned into conte
 - A search that ran and found nothing is charged; a failed call is not. On an error, follow `error.fix` once; do not repeat a call that failed the same way. After `timeout`, do not retry on your own.
 - Answer in the user's language. Keep original quotes in their language and add a translation when it differs.
 - End with the credits spent (from `billing.display`) and the balance.
+
+## When credits run out · 积分用完时
+
+Answers `insufficient_balance` (402) or `plan_limit` (403) mean nothing ran and nothing was charged. Do not try again in a loop. Instead:
+
+1. **Hand over what is done so far**, marked as partial: the hot-list items that touch the niche, and any breakouts found.
+2. **Say what the rest needs:** the steps left and their credits, from the cost below.
+3. **Give the way to continue:** call `account` and repeat its `purchase.display` (a purchase link that needs no sign-in). If it is absent, use https://socialtoai.com/console/billing/ . Purchases start at $10 for 3,000 credits. Say plainly that buying is optional and the partial result is theirs either way.
+4. **After they buy,** call `account` to confirm the balance, then **continue from the step that stopped.** Do not repeat paid steps: earlier answers can be read again free with `handle` for 24 hours.
+
+`max_cost_exceeded` (402) means the call costs more than the budget they set. Show the quote and ask whether to raise it or use a smaller `scale`.
 
 ## Cost · 费用
 

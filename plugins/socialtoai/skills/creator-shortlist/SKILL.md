@@ -4,12 +4,23 @@ description: "Build a first-pass creator (KOL/KOC) shortlist for a niche on Douy
 license: MIT
 metadata:
   author: SocialToAI
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 # Creator shortlist · 达人初筛
 
 A first-pass list of creators for a niche, judged against the brief, with red flags and their other platforms, before checking rates in the platform's marketplace. 按需求初筛一个领域的达人，标出风险和其他平台账号，再去平台官方的达人平台核对报价。
+
+## What you hand over · 交付物
+
+A first-pass shortlist to check in the platform's marketplace: creators who fit the brief, their size and recent engagement, red flags, and why others were left out. 一份拿去平台达人后台核对的初筛名单：匹配的达人、体量和近期互动、风险，以及排除的原因。
+
+**Done when:**
+
+- Each name has a public handle and link, and a fit reason tied to the brief.
+- Red flags are named, or it says none were seen.
+- It says rates and contracts are confirmed in the platform's marketplace.
+- Paid posts are reminded to carry the ad or partnership label.
 
 ## When to use · 什么时候用
 
@@ -17,15 +28,16 @@ A first-pass list of creators for a niche, judged against the brief, with red fl
 - "Find home-coffee creators on TikTok between 10K and 100K followers."
 - First pass before rates and audience checks in the platform's own marketplace.
 
-## Connect first · 先连接
+## Before you start · 开始之前
 
-1. Call `account` (free). If it answers, note the balance and go on.
-2. If the SocialToAI tools are not available, stop and tell the user how to connect, then wait for them:
-   - **Claude Code:** `claude mcp add --transport http socialtoai https://mcp.socialtoai.com/mcp`, then `/mcp` → socialtoai → sign in → Allow. Or install this plugin: `/plugin marketplace add socialtoai/socialtoai-skills`, then `/plugin install socialtoai@socialtoai`.
+1. Call `account` (free). Note the balance and compare it with the cost below. If the job costs more than the balance, say so and offer the smaller version before spending anything.
+2. **If the SocialToAI tools are not there, or a call answers `unauthorized` (401): stop and connect first.** Nothing was charged. Tell the user:
+   - **Claude Code:** `claude mcp add --transport http socialtoai https://mcp.socialtoai.com/mcp`, then `/mcp` → socialtoai → sign in → Allow.
    - **Codex:** `codex mcp add socialtoai --url https://mcp.socialtoai.com/mcp`
    - **ChatGPT, Claude apps, Cursor and other clients:** https://socialtoai.com/mcp/ (中文：https://socialtoai.com/zh/mcp/)
-   - Signing in creates the account with 100 free credits, no card. Never ask the user to paste a key into the chat.
-3. If the balance is below the cost estimate below, say so before running anything.
+   - Signing in creates the account with **100 free credits, no card**, and no platform account of theirs is used. A Douyin first pass is 9 credits; the cross-platform check on 5 creators adds 130, so on free credits run the first pass and check 2–3 of them.
+   - Never ask the user to paste a key into the chat.
+3. When they say it is connected, carry on from where you stopped, with what they already told you. Do not ask again.
 
 ## Ask for (only what is missing) · 需要的输入
 
@@ -36,8 +48,7 @@ A first-pass list of creators for a niche, judged against the brief, with red fl
 ## Steps · 步骤
 
 1. **Search creators.**
-   - Douyin, Bilibili, X, Instagram, TikTok: `find_creators` with `query`, `platform`, `followers_min`, `followers_max`, `brief`, `scale: "small"` (20 creators fetched; `medium` 50). On Douyin it reads the platform's own creator marketplace.
-   - Xiaohongshu (not offered by `find_creators`): `search` with `platform: "xiaohongshu"`, `type: "user"`, `query`; then `user_profile` and `user_posts` (each 12 credits) for the 5–10 most relevant; judge fit yourself from their notes.
+   - Douyin, Xiaohongshu, Bilibili, X, Instagram, TikTok, YouTube, Weibo: `find_creators` with `query`, `platform`, `followers_min`, `followers_max`, `brief`, `scale: "small"` (20 creators fetched; `medium` 50). On Douyin it reads the platform's own creator marketplace.
 2. **Shortlist** by fit to the brief, size inside the range, recent engagement compared with the creator's own usual, and comment quality (real questions beat emoji and giveaway replies).
 3. **Cross-platform check** for the top 5: `creator_card` with `creator: "<profile link>"`, `scale: "small"`. Note how strong the evidence is that each extra account is the same person.
 4. **Douyin marketplace data, when asked:** `call` with `op: "douyin.kol_search"` (3 credits) to get the marketplace ID, then `douyin.kol_performance` (3 credits: median plays, engagement and completion rates, expected CPM/CPE) and, only on request, `douyin.kol_rates` (24 credits: quotes per format).
@@ -71,9 +82,20 @@ A first-pass list of creators for a niche, judged against the brief, with red fl
 
 - Creators are public accounts: name them by their public handle and link. Do not look for personal contact details.
 
+## When credits run out · 积分用完时
+
+Answers `insufficient_balance` (402) or `plan_limit` (403) mean nothing ran and nothing was charged. Do not try again in a loop. Instead:
+
+1. **Hand over what is done so far**, marked as partial: the creators read so far with their fit.
+2. **Say what the rest needs:** the steps left and their credits, from the cost below.
+3. **Give the way to continue:** call `account` and repeat its `purchase.display` (a purchase link that needs no sign-in). If it is absent, use https://socialtoai.com/console/billing/ . Purchases start at $10 for 3,000 credits. Say plainly that buying is optional and the partial result is theirs either way.
+4. **After they buy,** call `account` to confirm the balance, then **continue from the step that stopped.** Do not repeat paid steps: earlier answers can be read again free with `handle` for 24 hours.
+
+`max_cost_exceeded` (402) means the call costs more than the budget they set. Show the quote and ask whether to raise it or use a smaller `scale`.
+
 ## Cost · 费用
 
-`find_creators` small: Douyin 9 credits, Bilibili 90, X 75, Instagram 93, TikTok 92. `creator_card` small from Douyin 14 per creator. Douyin shortlist of 20 plus cross-platform cards for the top 5 ≈ 9 + 70 = **79 credits (≈ $0.26)**. Xiaohongshu (no `find_creators` there): account search 12 + profile 12 + posts 12 per creator, ≈ **12 + 10 × 24 = 252 credits** for ten candidates.
+`find_creators` small: Douyin 9 credits, Xiaohongshu 30, X 75, Bilibili 90, TikTok 92, YouTube 92, Instagram 93, Weibo 96. `creator_card` small: Douyin 26 per creator, Xiaohongshu 58. Douyin shortlist of 20 plus cross-platform cards for the top 5 ≈ 9 + 130 = **139 credits (≈ $0.46)**. Xiaohongshu ≈ 30 + 5 × 58 = **320 credits (≈ $1.07)**.
 
 ## Details · 更多
 

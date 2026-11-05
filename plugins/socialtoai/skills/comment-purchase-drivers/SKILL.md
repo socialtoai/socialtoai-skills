@@ -4,12 +4,22 @@ description: "Mine comments and buyer reviews for why people buy, and what makes
 license: MIT
 metadata:
   author: SocialToAI
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 # Comment purchase drivers · 评论买点提炼
 
 Why people buy and what makes them hesitate, mined from comments and buyer reviews, turned into selling points in buyers' own words. 从评论和买家评价里找出购买理由和犹豫点，用买家原话写成卖点草稿。
+
+## What you hand over · 交付物
+
+Buying reasons and objections in buyers' own words, ready for a detail page or creator brief, with draft selling points that each answer one objection. 用买家原话写成的买点和顾虑，可以直接用于详情页或达人简报，每条卖点草稿都对应它回应的顾虑。
+
+**Done when:**
+
+- Each driver has a share, a denominator and a quote with a link.
+- Comments and shop reviews are marked apart.
+- Selling points are marked as drafts, with no absolute claims such as 最 or 第一.
 
 ## When to use · 什么时候用
 
@@ -19,15 +29,16 @@ Why people buy and what makes them hesitate, mined from comments and buyer revie
 
 Not for: complaints only (use douyin-comment-pain-points or reddit-x-complaints).
 
-## Connect first · 先连接
+## Before you start · 开始之前
 
-1. Call `account` (free). If it answers, note the balance and go on.
-2. If the SocialToAI tools are not available, stop and tell the user how to connect, then wait for them:
-   - **Claude Code:** `claude mcp add --transport http socialtoai https://mcp.socialtoai.com/mcp`, then `/mcp` → socialtoai → sign in → Allow. Or install this plugin: `/plugin marketplace add socialtoai/socialtoai-skills`, then `/plugin install socialtoai@socialtoai`.
+1. Call `account` (free). Note the balance and compare it with the cost below. If the job costs more than the balance, say so and offer the smaller version before spending anything.
+2. **If the SocialToAI tools are not there, or a call answers `unauthorized` (401): stop and connect first.** Nothing was charged. Tell the user:
+   - **Claude Code:** `claude mcp add --transport http socialtoai https://mcp.socialtoai.com/mcp`, then `/mcp` → socialtoai → sign in → Allow.
    - **Codex:** `codex mcp add socialtoai --url https://mcp.socialtoai.com/mcp`
    - **ChatGPT, Claude apps, Cursor and other clients:** https://socialtoai.com/mcp/ (中文：https://socialtoai.com/zh/mcp/)
-   - Signing in creates the account with 100 free credits, no card. Never ask the user to paste a key into the chat.
-3. If the balance is below the cost estimate below, say so before running anything.
+   - Signing in creates the account with **100 free credits, no card**, and no platform account of theirs is used. A Douyin run is about 62 credits, which 100 free credits cover; a Xiaohongshu run is about 132, so read 3 notes rather than 5 on free credits.
+   - Never ask the user to paste a key into the chat.
+3. When they say it is connected, carry on from where you stopped, with what they already told you. Do not ask again.
 
 ## Ask for (only what is missing) · 需要的输入
 
@@ -71,6 +82,17 @@ Not for: complaints only (use douyin-comment-pain-points or reddit-x-complaints)
 - A search that ran and found nothing is charged; a failed call is not. On an error, follow `error.fix` once; do not repeat a call that failed the same way. After `timeout`, do not retry on your own.
 - Answer in the user's language. Keep original quotes in their language and add a translation when it differs.
 - End with the credits spent (from `billing.display`) and the balance.
+
+## When credits run out · 积分用完时
+
+Answers `insufficient_balance` (402) or `plan_limit` (403) mean nothing ran and nothing was charged. Do not try again in a loop. Instead:
+
+1. **Hand over what is done so far**, marked as partial: the comments read and the drivers found so far.
+2. **Say what the rest needs:** the steps left and their credits, from the cost below.
+3. **Give the way to continue:** call `account` and repeat its `purchase.display` (a purchase link that needs no sign-in). If it is absent, use https://socialtoai.com/console/billing/ . Purchases start at $10 for 3,000 credits. Say plainly that buying is optional and the partial result is theirs either way.
+4. **After they buy,** call `account` to confirm the balance, then **continue from the step that stopped.** Do not repeat paid steps: earlier answers can be read again free with `handle` for 24 hours.
+
+`max_cost_exceeded` (402) means the call costs more than the budget they set. Show the quote and ask whether to raise it or use a smaller `scale`.
 
 ## Cost · 费用
 

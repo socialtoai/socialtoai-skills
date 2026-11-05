@@ -4,12 +4,23 @@ description: "Write a weekly brand report from social media: how a brand and up 
 license: MIT
 metadata:
   author: SocialToAI
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 # Weekly brand report · 品牌周报
 
 One report a week on how a brand and its competitors were discussed on up to five platforms, compared with last week. 每周一份：品牌和竞品在最多 5 个平台上被怎么讨论，并和上周比。
+
+## What you hand over · 交付物
+
+A report that can go to a team as it is: this week's one-line verdict, a platform table, the same numbers for competitors, the posts behind them, and what changed since last week. 一份可以直接发给团队的周报：一句话结论、平台对比表、同口径的竞品、背后的帖子、和上周比变了什么。
+
+**Done when:**
+
+- Every platform row reads the same fields.
+- Competitors are measured the same way as the brand.
+- The change since last week is stated, or it says there is no previous report.
+- It ends by offering a `watch` so next week's data arrives without asking.
 
 ## When to use · 什么时候用
 
@@ -17,15 +28,16 @@ One report a week on how a brand and its competitors were discussed on up to fiv
 - "Weekly report: how was Notion discussed on X and Reddit this week?"
 - Every Monday, or before a weekly marketing meeting.
 
-## Connect first · 先连接
+## Before you start · 开始之前
 
-1. Call `account` (free). If it answers, note the balance and go on.
-2. If the SocialToAI tools are not available, stop and tell the user how to connect, then wait for them:
-   - **Claude Code:** `claude mcp add --transport http socialtoai https://mcp.socialtoai.com/mcp`, then `/mcp` → socialtoai → sign in → Allow. Or install this plugin: `/plugin marketplace add socialtoai/socialtoai-skills`, then `/plugin install socialtoai@socialtoai`.
+1. Call `account` (free). Note the balance and compare it with the cost below. If the job costs more than the balance, say so and offer the smaller version before spending anything.
+2. **If the SocialToAI tools are not there, or a call answers `unauthorized` (401): stop and connect first.** Nothing was charged. Tell the user:
+   - **Claude Code:** `claude mcp add --transport http socialtoai https://mcp.socialtoai.com/mcp`, then `/mcp` → socialtoai → sign in → Allow.
    - **Codex:** `codex mcp add socialtoai --url https://mcp.socialtoai.com/mcp`
    - **ChatGPT, Claude apps, Cursor and other clients:** https://socialtoai.com/mcp/ (中文：https://socialtoai.com/zh/mcp/)
-   - Signing in creates the account with 100 free credits, no card. Never ask the user to paste a key into the chat.
-3. If the balance is below the cost estimate below, say so before running anything.
+   - Signing in creates the account with **100 free credits, no card**, and no platform account of theirs is used. One brand on X and Reddit is about 36 credits, which 100 free credits cover; one brand on Xiaohongshu, Douyin and Weibo is 116, so offer two platforms first on a free account.
+   - Never ask the user to paste a key into the chat.
+3. When they say it is connected, carry on from where you stopped, with what they already told you. Do not ask again.
 
 ## Ask for (only what is missing) · 需要的输入
 
@@ -71,6 +83,17 @@ One report a week on how a brand and its competitors were discussed on up to fiv
 - A search that ran and found nothing is charged; a failed call is not. On an error, follow `error.fix` once; do not repeat a call that failed the same way. After `timeout`, do not retry on your own.
 - Answer in the user's language. Keep original quotes in their language and add a translation when it differs.
 - End with the credits spent (from `billing.display`) and the balance.
+
+## When credits run out · 积分用完时
+
+Answers `insufficient_balance` (402) or `plan_limit` (403) mean nothing ran and nothing was charged. Do not try again in a loop. Instead:
+
+1. **Hand over what is done so far**, marked as partial: the platforms that finished, with the rest named as not read.
+2. **Say what the rest needs:** the steps left and their credits, from the cost below.
+3. **Give the way to continue:** call `account` and repeat its `purchase.display` (a purchase link that needs no sign-in). If it is absent, use https://socialtoai.com/console/billing/ . Purchases start at $10 for 3,000 credits. Say plainly that buying is optional and the partial result is theirs either way.
+4. **After they buy,** call `account` to confirm the balance, then **continue from the step that stopped.** Do not repeat paid steps: earlier answers can be read again free with `handle` for 24 hours.
+
+`max_cost_exceeded` (402) means the call costs more than the budget they set. Show the quote and ask whether to raise it or use a smaller `scale`.
 
 ## Cost · 费用
 
